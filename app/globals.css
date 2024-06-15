@@ -31,3 +31,10 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer components {
+
+  .test {
+    @apply bg-slate-700
+  }
+}
