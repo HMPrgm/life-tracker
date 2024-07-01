@@ -1,2 +1,1 @@
-# Life Tracker
-A todo-list, habit tracker, and calendar coming soon...
+This is a Next.js project created
