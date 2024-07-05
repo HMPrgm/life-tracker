@@ -18,6 +18,9 @@ export default function AddTask({ addTask }: { addTask: Function }) {
     });
     setIsAddingTask(false)
   }
+  const cancelAddTask = () => {
+    setIsAddingTask(false)
+  }
 
   if (!isAddingTask) {
     return (
@@ -25,7 +28,7 @@ export default function AddTask({ addTask }: { addTask: Function }) {
     )
   } else {
     return (
-    <AddTaskForm addTask={addTaskEvent}></AddTaskForm>
+    <AddTaskForm addTask={addTaskEvent} cancel={cancelAddTask}></AddTaskForm>
     )
   }
 }
