@@ -1,18 +1,18 @@
 'use client'
 import React from 'react'
-import { Task, tasks, ProjectType } from '../interfaces/task'
+import { Task, ProjectType } from '../interfaces/task'
 
-export default function AddTask() {
+export default function AddTask({ addTask }: { addTask: Function }) {
 
-    const addTask = () => {
-        tasks.push({
-            name:"New Task",
-            date:"Today",
-            project:ProjectType.School
-        })
-    }
+  const addTaskHelper = () => {
+    addTask({
+      name: "New Task",
+      date: "Today",
+      project: ProjectType.School
+    });
+  }
 
   return (
-    <div className='text-xs pl-2 hover:text-slate-600 hover:cursor-pointer transition-colors' onClick={addTask}>New Task</div>
+    <div className='text-xs pl-2 hover:text-slate-600 hover:cursor-pointer transition-colors' onClick={addTaskHelper}>New Task</div>
   )
 }
