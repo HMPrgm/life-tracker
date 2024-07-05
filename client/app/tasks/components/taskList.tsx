@@ -7,7 +7,7 @@ export default function TaskList() {
     const name:string = "School"
     const [tasks, setTasks] = useState([
         {
-            name:"Math Homework",
+            name:"Math Homework and 3.1,3.2,3.4",
             date:"Today",
             project:ProjectType.School
         },
@@ -29,7 +29,7 @@ export default function TaskList() {
     }
 
     return (
-        <div>
+        <div className='max-w-44'>
             <h2 className='font-bold pb-2 text-lg'>{name}</h2>
             {tasks.map(task => <TaskItem task={task} key={task.name}></TaskItem>)}
             <AddTask addTask={addTask}></AddTask>
