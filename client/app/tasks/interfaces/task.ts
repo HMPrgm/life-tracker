@@ -1,12 +1,11 @@
 export interface Task{
     name:string;
     date:string;
-    project:ProjectType;
+    project:string;
 }
 
-export enum ProjectType{
-    School,
-    Work,
-    Vacation
-}
-
+// export enum ProjectType{
+//     School,
+//     Work,
+//     Vacation
+// }

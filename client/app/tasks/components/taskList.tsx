@@ -1,36 +1,23 @@
 'use client'
-import React, { useState } from 'react'
-import { Task, ProjectType } from '../interfaces/task'
+import React, { useEffect, useState } from 'react'
+import { Task } from '../interfaces/task'
 import TaskItem from './taskItem'
 import AddTask from './addTask'
-export default function TaskList() {
-    const name:string = "School"
-    const [tasks, setTasks] = useState([
-        {
-            name:"Math Homework and 3.1,3.2,3.4",
-            date:"Today",
-            project:ProjectType.School
-        },
-        {
-            name:"Science Project",
-            date:"Today",
-            project:ProjectType.School
-        },
-        {
-            name:"History Essay",
-            date:"Tomorrow",
-            project:ProjectType.School
-        }
-    ])
+export default function TaskList({project, initialTasks}:{project:string,initialTasks:Task[]}) {
+    const [tasks, setTasks] = useState<Task[]>([])
 
     function addTask(task:Task) {
         setTasks(tasks.concat(task));
         console.log(tasks)
     }
 
+    useEffect(()=>{
+        setTasks(initialTasks)
+    },[initialTasks])
+
     return (
         <div className='max-w-44'>
-            <h2 className='font-bold pb-2 text-lg'>{name}</h2>
+            <h2 className='font-bold pb-2 text-lg'>{project}</h2>
             {tasks.map(task => <TaskItem task={task} key={task.name}></TaskItem>)}
             <AddTask addTask={addTask}></AddTask>
         </div>

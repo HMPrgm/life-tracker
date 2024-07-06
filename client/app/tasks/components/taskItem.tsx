@@ -1,4 +1,4 @@
-import { Task, ProjectType } from "../interfaces/task"
+import { Task } from "../interfaces/task"
 
 export default function TaskItem({task}:{task:Task}) {
   return (

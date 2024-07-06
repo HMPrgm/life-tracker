@@ -5,6 +5,7 @@ const cors = require('cors')
 
 
 const mongoose = require('mongoose');
+const Task = require('./models/task')
 main().catch(err => console.log(err));
 
 async function main() {
@@ -16,14 +17,10 @@ async function main() {
 app.use(cors())
 app.use(express.json())
 
-app.get("/tasks", (req,res)=>{
-    
-    res.json({
-        start:Date.now(),
-        end:Date.now() + 60*60*1000,
-        name:"Work on Life Tracker",
-        description:"work on Backend api with express and mongo"
-    })
+app.get("/tasks", async (req,res)=>{
+    const tasks = await Task.find({})
+    console.log(tasks)
+    res.json(tasks)
 })
 
 const PORT = 5000
