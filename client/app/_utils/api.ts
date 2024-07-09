@@ -25,6 +25,15 @@ module.exports.addTask =  async function addTask(task:Task):Promise<Task|null> {
     }
 }
 
+module.exports.removeTask =  async function addTask(id:string):Promise<Boolean> {
+    try {
+        const response = await axios.delete(`http://localhost:5000/tasks/${id}`);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
 
 // ! DOES NOT ACCESS BACKEND
 function serverToClientTask(server: { _id: string; name: string; date: string; completed: boolean; project: string; }): Task|null {

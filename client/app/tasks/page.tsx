@@ -21,7 +21,10 @@ export default function Page() {
     setTasks(tasks.concat(newTask))
   }
 
-
+  const removeTask = async(id:string) => {
+    await api.removeTask(id);
+    setTasks(tasks.filter(t => t._id !== id ))
+  }
 
   useEffect(()=>{
     getTasks();
@@ -32,7 +35,7 @@ export default function Page() {
   }
   return (
     <main className='p-6 flex gap-10'>
-      <TaskList initialTasks={tasks} project={'School'} addTask={addTask}></TaskList>
+      <TaskList initialTasks={tasks} project={'School'} addTask={addTask} removeTask={removeTask}></TaskList>
     </main>
   )
 }

@@ -28,6 +28,12 @@ app.post("/tasks", async (req,res)=>{
   res.json({task:newTask})
 })
 
+app.delete("/tasks/:id", async (req,res)=>{
+  const {id} = req.params;
+  const removedTask = await Task.findByIdAndDelete(id)
+  console.log(removedTask)
+  res.json(removedTask)
+})
 const PORT = 5000
 app.listen(PORT,()=> {
     console.log(`Listening on port ${PORT}`)
