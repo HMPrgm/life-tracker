@@ -16,8 +16,9 @@ export default function Page() {
     setIsLoading(false);
   }
 
-  const addTask = (task:Task) => {
-    api.addTask(task);
+  const addTask = async (task:Task) => {
+    const newTask = await api.addTask(task);
+    setTasks(tasks.concat(newTask))
   }
 
 

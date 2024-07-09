@@ -16,12 +16,12 @@ module.exports.getTasks =  async function getTasks(): Promise<Task[]> {
     }
 }
 
-module.exports.addTask =  async function addTask(task:Task):Promise<boolean> {
+module.exports.addTask =  async function addTask(task:Task):Promise<Task|null> {
     try {
         const response = await axios.post("http://localhost:5000/tasks", {task})
-        return true
+        return serverToClientTask(response.data.task);
     } catch (e) {
-        return false
+        return null;
     }
 }
 

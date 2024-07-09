@@ -24,8 +24,8 @@ app.get("/tasks", async (req,res)=>{
 
 app.post("/tasks", async (req,res)=>{
   const {task} = req.body;
-  const newTask = new Task(task).save();
-  res.json(newTask)
+  const newTask = await new Task(task).save();
+  res.json({task:newTask})
 })
 
 const PORT = 5000
