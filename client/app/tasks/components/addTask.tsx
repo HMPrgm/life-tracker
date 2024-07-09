@@ -1,6 +1,5 @@
 'use client'
 import React, { useState } from 'react'
-import { Task, ProjectType } from '../interfaces/task'
 import AddTaskForm from './addTaskForm'
 
 export default function AddTask({ addTask }: { addTask: Function }) {
@@ -14,7 +13,7 @@ export default function AddTask({ addTask }: { addTask: Function }) {
     addTask({
       name,
       date,
-      project: ProjectType.School
+      project: 'School',
     });
     setIsAddingTask(false)
   }

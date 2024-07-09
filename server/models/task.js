@@ -5,9 +5,13 @@ const { Schema } = mongoose;
 const taskSchema = new Schema({
     name: String,
     date: Date,
-    completed: Boolean,
+    completed: {
+        type: Boolean,
+        default:false
+    },
     project: {
         type: String
+        
     }
 });
 
