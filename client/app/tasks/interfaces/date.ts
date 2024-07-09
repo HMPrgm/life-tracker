@@ -1,6 +1,6 @@
 export function stringToDate (date:string):LifeDate|null{
     try {
-        const day:LifeDate = new LifeDate(parseInt(date.substring(8,10)),parseInt(date.substring(5,7)),parseInt(date.substring(0,4)))
+        const day:LifeDate = new LifeDate(parseInt(date.substring(0,4)),parseInt(date.substring(8,10)),parseInt(date.substring(5,7)))
         return day;
     }
     catch {

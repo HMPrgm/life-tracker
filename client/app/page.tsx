@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react"
 import axios from 'axios'
-import { getTasks } from "./_api/api";
+import { getTasks } from "./_utils/api";
 export default function Home() {
 
   const [text, setText] = useState("Loading...");

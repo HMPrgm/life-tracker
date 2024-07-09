@@ -2,14 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import { Task } from '../interfaces/task'
 import TaskItem from './taskItem'
-import AddTask from './addTask'
-export default function TaskList({project, initialTasks}:{project:string,initialTasks:Task[]}) {
+import AddTask from './addTask/addTask'
+export default function TaskList({project, initialTasks, addTask}:{project:string,initialTasks:Task[], addTask:Function}) {
     const [tasks, setTasks] = useState<Task[]>([])
-
-    function addTask(task:Task) {
-        setTasks(tasks.concat(task));
-        console.log(tasks)
-    }
 
     useEffect(()=>{
         setTasks(initialTasks)

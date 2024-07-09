@@ -14,19 +14,18 @@ async function main() {
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
 app.get("/tasks", async (req,res)=>{
-    const tasks = await Task.find({})
-    console.log(tasks)
-    res.json(tasks)
+    const tasks = await Task.find({});
+    res.json(tasks);
 })
 
-app.get("/tasks", async (req,res)=>{
+app.post("/tasks", async (req,res)=>{
   const {task} = req.body;
-  const status = await Task.insert(task)
-  res.json(status)
+  const newTask = new Task(task).save();
+  res.json(newTask)
 })
 
 const PORT = 5000

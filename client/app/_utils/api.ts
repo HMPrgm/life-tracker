@@ -3,19 +3,20 @@ import { Task } from '../tasks/interfaces/task';
 import { LifeDate, stringToDate } from '../tasks/interfaces/date';
 
 
-
-export async function getTasks(): Promise<Task[] | null> {
+// ! ACCESSES THE BACKEND
+module.exports.getTasks =  async function getTasks(): Promise<Task[]> {
     try {
         const response = await axios.get("http://localhost:5000/tasks")
         const tasks = response.data.map(serverToClientTask)
         console.log(tasks);
         return tasks
     } catch (e) {
-        return null
+        console.log(e)
+        return []
     }
 }
 
-export async function addTask(task:Task):Promise<boolean> {
+module.exports.addTask =  async function addTask(task:Task):Promise<boolean> {
     try {
         const response = await axios.post("http://localhost:5000/tasks", {task})
         return true
@@ -24,6 +25,8 @@ export async function addTask(task:Task):Promise<boolean> {
     }
 }
 
+
+// ! DOES NOT ACCESS BACKEND
 function serverToClientTask(server: { _id: string; name: string; date: string; completed: boolean; project: string; }): Task|null {
     const clientDate:LifeDate|null = stringToDate(server.date)
     if (!clientDate) {
