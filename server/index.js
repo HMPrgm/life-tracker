@@ -23,6 +23,12 @@ app.get("/tasks", async (req,res)=>{
     res.json(tasks)
 })
 
+app.get("/tasks", async (req,res)=>{
+  const {task} = req.body;
+  const status = await Task.insert(task)
+  res.json(status)
+})
+
 const PORT = 5000
 app.listen(PORT,()=> {
     console.log(`Listening on port ${PORT}`)

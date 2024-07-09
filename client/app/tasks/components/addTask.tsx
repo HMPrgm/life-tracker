@@ -13,7 +13,7 @@ export default function AddTask({ addTask }: { addTask: Function }) {
     addTask({
       name,
       date,
-      project: 'School',
+      project: 'School'
     });
     setIsAddingTask(false)
   }

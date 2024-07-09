@@ -15,7 +15,9 @@ export default function Home() {
       setText(data[0].name)
   }
   return (
-    <div>{text}</div>
+    <div>
+      <div>{text}</div>
+    </div>
   )
 }
 
