@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Task } from '../tasks/interfaces/task';
-import { LifeDate, stringToDate } from '../tasks/interfaces/date';
+
 
 
 // ! ACCESSES THE BACKEND
@@ -37,14 +37,10 @@ module.exports.removeTask =  async function addTask(id:string):Promise<Boolean> 
 
 // ! DOES NOT ACCESS BACKEND
 function serverToClientTask(server: { _id: string; name: string; date: string; completed: boolean; project: string; }): Task|null {
-    const clientDate:LifeDate|null = stringToDate(server.date)
-    if (!clientDate) {
-        return null
-    }
     return {
         _id: server._id,
         name: server.name,
-        date: clientDate,
+        date: new Date(server.date),
         completed: server.completed,
         project: server.project
     }

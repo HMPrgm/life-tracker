@@ -1,9 +1,7 @@
-import { LifeDate } from "./date";
-
 export interface Task{
     _id:string;
     name:string;
-    date:LifeDate;
+    date:Date;
     project:string;
     completed:boolean;
 }

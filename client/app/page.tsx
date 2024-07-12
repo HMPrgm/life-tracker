@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react"
 import axios from 'axios'
-import { getTasks } from "./_utils/api";
+const api = require("./_utils/api");
 export default function Home() {
 
   const [text, setText] = useState("Loading...");
@@ -10,7 +10,7 @@ export default function Home() {
   }, []);
 
   const setTextHelper = async () => {
-    const data = await getTasks();
+    const data = await api.getTasks();
     if (data)
       setText(data[0].name)
   }
