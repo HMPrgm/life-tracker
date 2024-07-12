@@ -1,9 +1,15 @@
 import { Task } from "@/app/tasks/interfaces/task";
 
-export const tasksToEvents = (tasks:Task[]):Map<number,string> => {
-    const daysTask:Map<number,string> = new Map<number,string>
+export const tasksToEvents = (tasks:Task[]):Map<number,Task[]> => {
+    const daysTask:Map<number,Task[]> = new Map<number,Task[]>();
     for (let task of tasks) {
-        daysTask.set(task.date.getDate(), task.name)
+        let curDate = task.date.getDate()
+        if (daysTask.get(curDate) === undefined) {
+            daysTask.set(curDate, [task])
+        } else {
+            daysTask.get(curDate)?.push(task)
+        }
+        
     }
     return daysTask;
 }

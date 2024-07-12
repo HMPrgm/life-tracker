@@ -9,7 +9,6 @@ module.exports.getTasks =  async function getTasks(): Promise<Task[]> {
     try {
         const response = await axios.get("http://localhost:5000/tasks")
         const tasks = response.data.map(serverToClientTask)
-        console.log(tasks);
         return tasks
     } catch (e) {
         console.log(e)
