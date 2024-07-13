@@ -19,9 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} flex`}>
         <Navbar></Navbar>
-        <div className="flex-grow">
+        <main className="flex-grow">
           {children}
-          </div>
+          </main>
         </body>
     </html>
   );

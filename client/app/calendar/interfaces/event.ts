@@ -1,4 +1,5 @@
 import { Task } from "@/app/tasks/interfaces/task";
+const api = require("../../_utils/api");
 
 export const tasksToEvents = (tasks:Task[]):Map<number,Task[]> => {
     const daysTask:Map<number,Task[]> = new Map<number,Task[]>();
@@ -12,4 +13,10 @@ export const tasksToEvents = (tasks:Task[]):Map<number,Task[]> => {
         
     }
     return daysTask;
+}
+
+export const getEvents = (setEvents:Function) => {
+    api.getTasks().then((tasks:Task[])=>{
+        setEvents(tasksToEvents(tasks))
+    })
 }
