@@ -89,7 +89,7 @@ const Calendar: React.FC = () => {
                     {renderDays()}
                 </div>
             </div>
-            <div className='p-10 bg-gray-300'>{!currentEvent?'':currentEvent?.name}</div>
+            <EventDisplay event={currentEvent}></EventDisplay>
         </section>
     );
 };
