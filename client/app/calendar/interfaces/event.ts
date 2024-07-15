@@ -16,7 +16,7 @@ export const tasksToEvents = (tasks: Task[]): Map<number, Task[]> => {
 }
 
 export const getEvents = async (setEvents: Function) => {
-    const tasks: Task[] = api.getTasks();
+    const tasks: Task[] = await api.getTasks();
     setEvents(tasksToEvents(tasks));
 }
 

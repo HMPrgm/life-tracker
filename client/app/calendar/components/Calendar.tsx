@@ -62,13 +62,19 @@ const Calendar: React.FC = () => {
     //   <button onClick={handlePrevMonth} className="px-4 py-2 bg-blue-500 text-white rounded">Prev</button>
     {/* <button onClick={handleNextMonth} className="px-4 py-2 bg-blue-500 text-white rounded">Next</button> */ }
 
-    const handleCurrentEventChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setCurrentEvent(currentEvent);
-    }
-
-    // const changeCurrentEvent = (event:Task) => {
-    //     event.name = 
+    // const handleCurrentEventChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     const { id, value } = event.target
+    //     if (currentEvent === null) return;
+    //     console.log(currentEvent)
     // }
+
+    const changeCurrentEvent = (event: Task) => {
+        console.log(currentEvent)
+        if (currentEvent !== null) {
+            updateEvent(currentEvent);
+        }
+        setCurrentEvent(event);
+    }
 
     useEffect(() => {
         getEvents(setEvents);
@@ -96,7 +102,7 @@ const Calendar: React.FC = () => {
             </div>
             <div className='p-10 bg-gray-300 w-64'>
                 <h3 className='text-lg font-bold pb-3'>Event</h3>
-                <div contentEditable={true} onChange={handleCurrentEventChange} className='border-b-2 border-black focus:outline-none' id='name'>{!currentEvent ? '' : currentEvent?.name}</div>
+                <input type='text' className='border-b-2 border-black focus:outline-none' id='name' value={!currentEvent ? '' : currentEvent?.name}></input>
             </div>
         </section>
     );
