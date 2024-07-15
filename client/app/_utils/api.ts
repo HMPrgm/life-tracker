@@ -18,7 +18,9 @@ module.exports.getTasks =  async function getTasks(): Promise<Task[]> {
 
 module.exports.addTask =  async function addTask(task:Task):Promise<Task|null> {
     try {
+        alert(task.date)
         const response = await axios.post("http://localhost:5000/tasks", {task})
+        alert(serverToClientTask(response.data.task)?.date)
         return serverToClientTask(response.data.task);
     } catch (e) {
         return null;

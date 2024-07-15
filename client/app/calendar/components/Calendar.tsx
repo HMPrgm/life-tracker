@@ -1,9 +1,10 @@
 // components/Calendar.tsx
 'use client'
 import React, { useEffect, useState } from 'react';
-import { getEvents, updateEvent } from '../interfaces/event'
+const eventAPI =require('../interfaces/event');
 import { Task } from '@/app/tasks/interfaces/task';
 import DayItem from './events/dayItem'
+import AddEventForm from './events/addEventForm';
 
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const months = [
@@ -21,6 +22,11 @@ const Calendar: React.FC = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [currentEvent, setCurrentEvent] = useState<Task | null>(null);
     const [events, setEvents] = useState<Map<number, Task[]>>();
+
+    const addEvent = async (task: Task) => {
+        const newTask = await eventAPI.addEvent(task);
+        eventAPI.getEvents(setEvents);
+    }
 
     const getDaysInMonth = (year: number, month: number): number => {
         return new Date(year, month + 1, 0).getDate();
@@ -71,13 +77,13 @@ const Calendar: React.FC = () => {
     const changeCurrentEvent = (event: Task) => {
         console.log(currentEvent)
         if (currentEvent !== null) {
-            updateEvent(currentEvent);
+            eventAPI.updateEvent(currentEvent);
         }
         setCurrentEvent(event);
     }
 
     useEffect(() => {
-        getEvents(setEvents);
+        eventAPI.getEvents(setEvents);
     }, [])
 
     if (!events) {
@@ -100,10 +106,7 @@ const Calendar: React.FC = () => {
                     {renderDays()}
                 </div>
             </div>
-            <div className='p-10 bg-gray-300 w-64'>
-                <h3 className='text-lg font-bold pb-3'>Event</h3>
-                <input type='text' className='border-b-2 border-black focus:outline-none' id='name' value={!currentEvent ? '' : currentEvent?.name}></input>
-            </div>
+            <AddEventForm addEvent={addEvent}></AddEventForm>
         </section>
     );
 };
