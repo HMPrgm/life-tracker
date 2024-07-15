@@ -25,20 +25,23 @@ app.get("/tasks", async (req,res)=>{
 app.post("/tasks", async (req,res)=>{
   const {task} = req.body;
   const newTask = await new Task(task).save();
-  console.log(task)
   res.json({task:newTask})
 })
 
-app.patch("/tasks", async (req,res)=>{
-  const {task} = req.body;
-  const newTask = await Task.findByIdAndUpdate(task._id,task)
-  res.json({task:newTask})
-})
+// app.patch("/tasks", async (req,res)=>{
+//   const {task} = req.body;
+//   const newTask = await Task.findByIdAndUpdate(task._id,task)
+//   res.json({task:newTask})
+// })
 
 app.delete("/tasks/:id", async (req,res)=>{
-  const {id} = req.params;
+  try {
+    const {id} = req.params;
   const removedTask = await Task.findByIdAndDelete(id)
   res.json(removedTask)
+} catch {
+  res.json({status:200,message:"no task found :("})
+}
 })
 const PORT = 5000
 app.listen(PORT,()=> {

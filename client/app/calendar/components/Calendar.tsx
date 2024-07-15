@@ -24,7 +24,16 @@ const Calendar: React.FC = () => {
     const [events, setEvents] = useState<Map<number, Task[]>>();
 
     const addEvent = async (task: Task) => {
+        console.log(task)   
         const newTask = await eventAPI.addEvent(task);
+        eventAPI.getEvents(setEvents);
+    }
+
+    const removeCurrentEvent = async ()=> {
+        if (currentEvent === null) return;
+        console.log(currentEvent)   
+        await eventAPI.removeEvent(currentEvent);
+        setCurrentEvent(null);
         eventAPI.getEvents(setEvents);
     }
 
@@ -84,6 +93,7 @@ const Calendar: React.FC = () => {
 
     useEffect(() => {
         eventAPI.getEvents(setEvents);
+        // setCurrentEvent({name:'Test',date:new Date('07-14-2024'), completed:false, _id:'0', project:'School'})
     }, [])
 
     if (!events) {
@@ -106,7 +116,7 @@ const Calendar: React.FC = () => {
                     {renderDays()}
                 </div>
             </div>
-            <AddEventForm addEvent={addEvent}></AddEventForm>
+            <AddEventForm addEvent={addEvent} removeEvent={removeCurrentEvent} initialEvent={currentEvent}></AddEventForm>
         </section>
     );
 };

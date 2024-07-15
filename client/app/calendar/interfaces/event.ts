@@ -20,8 +20,8 @@ module.exports.getEvents = async (setEvents: Function) => {
     setEvents(exports.tasksToEvents(tasks));
 }
 
-module.exports.updateEvent = async (event: Task):Promise<Task> => {
-    return api.serverToClientTask(await api.updateTask(event))
+module.exports.removeEvent = async (event: Task) => {
+    return await api.removeTask(event._id)
 }
 
 module.exports.addEvent = async (event: Task):Promise<Task> => {

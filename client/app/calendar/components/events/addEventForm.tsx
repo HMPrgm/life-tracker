@@ -1,10 +1,20 @@
 'use client'
+import { processDate } from '@/app/_utils/util';
 import { Task } from '@/app/tasks/interfaces/task'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-export default function AddEventForm({ addEvent }: { addEvent: Function }) { //{ currentEvent }: { currentEvent: Task | null }
+AddEventForm.defaultProps = {
+  initialEvent: null
+}
 
-  const [formData, setFormData] = useState({ name: '', date: '' });
+interface EventFormState{
+  name:string;
+  date:string;
+}
+
+export default function AddEventForm({ addEvent,removeEvent,initialEvent }: { addEvent: Function,removeEvent:Function,initialEvent:Task|null }) { //{ currentEvent }: { currentEvent: Task | null }
+
+  const [formData, setFormData] = useState<EventFormState>({ name: '', date: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -12,25 +22,37 @@ export default function AddEventForm({ addEvent }: { addEvent: Function }) { //{
   }
 
   const handleSubmit = () => {
+    console.log(formData.date)
     if (formData.name && formData.date)
       addEvent({
         name: formData.name,
         date: formData.date,
         project: 'School'
       });
+    setFormData({name:'',date:''})
+    if (initialEvent)
+    {
+      removeEvent()
+    }
   }
 
   // const handleCancel = () => {
   //     cancel();
   // }
 
+  useEffect(()=>{
+    if (initialEvent) {
+      setFormData({name:initialEvent.name,date:processDate(initialEvent.date)})
+    }
+  },[initialEvent])
+
   return (
-    <form onSubmit={handleSubmit} className='p-10 bg-gray-300 w-64 '>
+    <form className='p-10 bg-gray-300 w-64 '>
       <h3>Event</h3>
-      <input type="text" placeholder='Name' id="name" onChange={handleChange} />
-      <input type="date" placeholder='date' id="date" className='text-xs' onChange={handleChange} />
+      <input type="text" placeholder='Name' id="name" name='name' value={formData.name} onChange={(handleChange)} />
+      <input type="date" placeholder='date' id="date" name='name' value={formData.date} className='text-xs' onChange={handleChange} />
       <div className='flex justify-evenly gap-1 [&>button]:px-2'>
-        <button type="button" className='text-xs text-white bg-black rounded py-1' onClick={handleSubmit}>Add Task</button>
+        <button type="button" className='text-xs text-white bg-black rounded py-1' onClick={handleSubmit}>{!initialEvent ?'Add Event':'Update Event'}</button>
       </div>
     </form>
   )
