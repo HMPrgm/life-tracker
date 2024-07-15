@@ -1,7 +1,7 @@
 export interface Task{
     _id:string;
     name:string;
-    date:Date;
+    date:number;
     project:string;
     completed:boolean;
 }

@@ -1,3 +1,3 @@
 import { format } from "date-fns";
 
-export const processDate = (d:Date) => format(d,'yyyy-MM-dd')
+export const processDate = (d:number) => format(d,'yyyy-MM-dd')

@@ -4,7 +4,7 @@ const api = require("../../_utils/api");
 module.exports.tasksToEvents = (tasks: Task[]): Map<number, Task[]> => {
     const daysTask: Map<number, Task[]> = new Map<number, Task[]>();
     for (let task of tasks) {
-        let curDate = task.date.getDate()
+        let curDate = new Date(task.date).getDate()
         if (daysTask.get(curDate) === undefined) {
             daysTask.set(curDate, [task])
         } else {

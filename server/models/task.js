@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const taskSchema = new Schema({
     name: String,
-    date: Date,
+    date: Number,
     completed: {
         type: Boolean,
         default:false

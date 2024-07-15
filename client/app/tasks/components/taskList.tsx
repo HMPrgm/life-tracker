@@ -8,6 +8,7 @@ export default function TaskList({project, initialTasks, addTask, removeTask}:{p
 
     useEffect(()=>{
         setTasks(initialTasks)
+        console.log(initialTasks)
     },[initialTasks])
 
     return (

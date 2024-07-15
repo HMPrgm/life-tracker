@@ -9,7 +9,7 @@ export default function AddTask({ addTask }: { addTask: Function }) {
   const startAddingTask = () => {
     setIsAddingTask(true)
   }
-  const addTaskEvent = (name: string, date: string) => {
+  const addTaskEvent = (name: string, date: number) => {
     addTask({
       name,
       date,

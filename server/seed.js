@@ -12,19 +12,19 @@ const seedDB = async () => {
     await Task.insertMany([
         {
             name:"Do Spanish Video",
-            date:"1987-09-28",
+            date:1721070210861,
             completed:false,
             project:"School"
         },
         {
             name:"Math Worksheet 3.2",
-            date:"1987-09-28",
+            date:1721070210861,
             completed:false,
             project:"School"
         },
         {
             name:"History Project 2",
-            date:"1987-09-28",
+            date:1721070210861,
             completed:false,
             project:"School"
         }

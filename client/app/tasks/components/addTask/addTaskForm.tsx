@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 
+
+interface EventFormState{
+    name:string;
+    date:number;
+  }
 export default function AddTaskForm({addTask, cancel}:{addTask:Function, cancel:Function}) {
 
-    const [formData, setFormData] = useState({ name: '', date: '' });
+    const [formData, setFormData] = useState<EventFormState>({ name: '', date: 0 });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {id,value} = e.target;
@@ -10,8 +15,9 @@ export default function AddTaskForm({addTask, cancel}:{addTask:Function, cancel:
     }
 
     const handleSubmit = () => {
+        const date:Date = new Date(formData.date)
         if (formData.name && formData.date)
-            addTask(formData.name,formData.date);
+            addTask(formData.name,date.valueOf()+1000*60*60*6);
         alert(formData.date)
     }
 

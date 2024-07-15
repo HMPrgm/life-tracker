@@ -14,7 +14,7 @@ export default function TaskItem({task, removeTask}:{task:Task, removeTask:Funct
     <div className="border-2 border-slate-600 rounded p-2 my-2">
         <h3>{task.name}</h3>
         <div className="flex items-center">
-          <p className="text-xs text-green-800 pr-1">{dateToString(task.date)}</p>
+          <p className="text-xs text-green-800 pr-1">{dateToString(new Date(task.date))}</p>
           <button className="rounded bg-black p-1 mx-1 text-white" onClick={removeTaskHelper}>Remove</button>
         </div>
     </div>

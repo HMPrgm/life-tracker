@@ -18,9 +18,7 @@ module.exports.getTasks =  async function getTasks(): Promise<Task[]> {
 
 module.exports.addTask =  async function addTask(task:Task):Promise<Task|null> {
     try {
-        alert(task.date)
         const response = await axios.post("http://localhost:5000/tasks", {task})
-        alert(serverToClientTask(response.data.task)?.date)
         return serverToClientTask(response.data.task);
     } catch (e) {
         return null;
@@ -47,11 +45,11 @@ module.exports.removeTask =  async function removeTask(id:string):Promise<Boolea
 
 
 // ! DOES NOT ACCESS BACKEND
-function serverToClientTask(server: { _id: string; name: string; date: string; completed: boolean; project: string; }): Task|null {
+function serverToClientTask(server: { _id: string; name: string; date: number; completed: boolean; project: string; }): Task|null {
     return {
         _id: server._id,
         name: server.name,
-        date: new Date(server.date),
+        date: server.date,
         completed: server.completed,
         project: server.project
     }

@@ -9,7 +9,7 @@ AddEventForm.defaultProps = {
 
 interface EventFormState{
   name:string;
-  date:string;
+  date:number;
 }
 
 export default function AddEventForm({ addEvent,removeEvent,initialEvent }: { addEvent: Function,removeEvent:Function,initialEvent:Task|null }) { //{ currentEvent }: { currentEvent: Task | null }
