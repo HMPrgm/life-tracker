@@ -25,7 +25,16 @@ module.exports.addTask =  async function addTask(task:Task):Promise<Task|null> {
     }
 }
 
-module.exports.removeTask =  async function addTask(id:string):Promise<Boolean> {
+module.exports.updateTask =  async function updateTask(task:Task):Promise<Task|null> {
+    try {
+        const response = await axios.patch("http://localhost:5000/tasks", {task})
+        return serverToClientTask(response.data.task);
+    } catch (e) {
+        return null;
+    }
+}
+
+module.exports.removeTask =  async function removeTask(id:string):Promise<Boolean> {
     try {
         const response = await axios.delete(`http://localhost:5000/tasks/${id}`);
         return true;

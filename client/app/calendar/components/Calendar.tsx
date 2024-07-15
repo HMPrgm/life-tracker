@@ -1,10 +1,9 @@
 // components/Calendar.tsx
 'use client'
 import React, { useEffect, useState } from 'react';
-import {getEvents} from '../interfaces/event'
+import { getEvents, updateEvent } from '../interfaces/event'
 import { Task } from '@/app/tasks/interfaces/task';
 import DayItem from './events/dayItem'
-import EventDisplay from './events/eventDisplay';
 
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const months = [
@@ -20,8 +19,8 @@ const months = [
 
 const Calendar: React.FC = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
-    const [currentEvent, setCurrentEvent] = useState<Task|null>(null);
-    const [events, setEvents] = useState<Map<number,Task[]>>()
+    const [currentEvent, setCurrentEvent] = useState<Task | null>(null);
+    const [events, setEvents] = useState<Map<number, Task[]>>();
 
     const getDaysInMonth = (year: number, month: number): number => {
         return new Date(year, month + 1, 0).getDate();
@@ -43,10 +42,10 @@ const Calendar: React.FC = () => {
         }
 
         for (let day: number = 1; day <= daysInMonth; day++) {
-            days.push(<DayItem key={day+firstDay-1} date={day} events={(events as Map<number,Task[]>).get(day)} setCurrentEvent={setCurrentEvent}></DayItem>);
+            days.push(<DayItem key={day + firstDay - 1} date={day} events={(events as Map<number, Task[]>).get(day)} setCurrentEvent={setCurrentEvent}></DayItem>);
         }
         for (let i: number = 0; i < 7 - (firstDay + daysInMonth) % 7; i++) {
-            days.push(<DayItem key={i+daysInMonth+firstDay}></DayItem>);
+            days.push(<DayItem key={i + daysInMonth + firstDay}></DayItem>);
         }
 
         return days;
@@ -63,11 +62,17 @@ const Calendar: React.FC = () => {
     //   <button onClick={handlePrevMonth} className="px-4 py-2 bg-blue-500 text-white rounded">Prev</button>
     {/* <button onClick={handleNextMonth} className="px-4 py-2 bg-blue-500 text-white rounded">Next</button> */ }
 
- 
+    const handleCurrentEventChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setCurrentEvent(currentEvent);
+    }
+
+    // const changeCurrentEvent = (event:Task) => {
+    //     event.name = 
+    // }
 
     useEffect(() => {
         getEvents(setEvents);
-    },[])
+    }, [])
 
     if (!events) {
         return (<div className='p-6'>Loading</div>)
@@ -89,7 +94,10 @@ const Calendar: React.FC = () => {
                     {renderDays()}
                 </div>
             </div>
-            <EventDisplay event={currentEvent}></EventDisplay>
+            <div className='p-10 bg-gray-300 w-64'>
+                <h3 className='text-lg font-bold pb-3'>Event</h3>
+                <div contentEditable={true} onChange={handleCurrentEventChange} className='border-b-2 border-black focus:outline-none' id='name'>{!currentEvent ? '' : currentEvent?.name}</div>
+            </div>
         </section>
     );
 };

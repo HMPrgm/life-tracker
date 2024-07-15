@@ -28,6 +28,12 @@ app.post("/tasks", async (req,res)=>{
   res.json({task:newTask})
 })
 
+app.patch("/tasks", async (req,res)=>{
+  const {task} = req.body;
+  const newTask = await Task.findByIdAndUpdate(task._id,task)
+  res.json({task:newTask})
+})
+
 app.delete("/tasks/:id", async (req,res)=>{
   const {id} = req.params;
   const removedTask = await Task.findByIdAndDelete(id)
