@@ -9,11 +9,11 @@ export default function AddTask({ addTask }: { addTask: Function }) {
   const startAddingTask = () => {
     setIsAddingTask(true)
   }
-  const addTaskEvent = (name: string, date: number) => {
+  const addTaskEvent = (name: string, date: number, project:string) => {
     addTask({
       name,
       date,
-      project: 'School'
+      project
     });
     setIsAddingTask(false)
   }

@@ -25,7 +25,7 @@ export default function Page() {
   }
   return (
     <main className='p-6 flex gap-10'>
-      {Array.from( (tasks).entries()).map(kvArr=><TaskList key={kvArr[0]} initTasks={kvArr[1]} project={kvArr[0]}></TaskList>)}
+      {Array.from( (tasks).entries()).map(kvArr=><TaskList key={kvArr[0]} initTasks={kvArr[1]} project={kvArr[0]} refresh={getTasks}></TaskList>)}
     </main>
   )
 }
