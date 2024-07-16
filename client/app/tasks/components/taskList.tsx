@@ -1,15 +1,25 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { Task } from '../interfaces/task'
+const api = require('../../_utils/api')
 import TaskItem from './taskItem'
 import AddTask from './addTask/addTask'
-export default function TaskList({project, initialTasks, addTask, removeTask}:{project:string,initialTasks:Task[], addTask:Function, removeTask:Function}) {
+export default function TaskList({initTasks, project}:{initTasks:Task[], project:string}) {
     const [tasks, setTasks] = useState<Task[]>([])
 
+    const addTask = async (task:Task) => {
+        const newTask = await api.addTask(task);
+        setTasks(tasks.concat(newTask))
+      }
+    
+      const removeTask = async(id:string) => {
+        await api.removeTask(id);
+        setTasks(tasks.filter(t => t._id !== id ))
+      }
+
     useEffect(()=>{
-        setTasks(initialTasks)
-        console.log(initialTasks)
-    },[initialTasks])
+        setTasks(initTasks)
+    },[initTasks])
 
     return (
         <div className='max-w-44'>

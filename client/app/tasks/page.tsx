@@ -1,41 +1,31 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import TaskList from './components/taskList'
+import { Task, tasksToMap } from './interfaces/task'
 const api = require('../_utils/api')
-import { Task } from './interfaces/task'
-
 export default function Page() {
 
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [tasks, setTasks] = useState<Task[]>([])
+  const [tasks, setTasks] = useState<Map<string,Task[]>>()
 
 
   const getTasks = async () => {
-    const tasks:Task[] = await api.getTasks();
-    setTasks(tasks);
+    setTasks(tasksToMap(await api.getTasks()));
     setIsLoading(false);
   }
 
-  const addTask = async (task:Task) => {
-    const newTask = await api.addTask(task);
-    setTasks(tasks.concat(newTask))
-  }
 
-  const removeTask = async(id:string) => {
-    await api.removeTask(id);
-    setTasks(tasks.filter(t => t._id !== id ))
-  }
 
   useEffect(()=>{
     getTasks();
   },[])
 
-  if (isLoading) {
+  if (isLoading || tasks === undefined) {
     return(<main className='p-6'>Loading</main>)
   }
   return (
     <main className='p-6 flex gap-10'>
-      <TaskList initialTasks={tasks} project={'School'} addTask={addTask} removeTask={removeTask}></TaskList>
+      {Array.from( (tasks).entries()).map(kvArr=><TaskList key={kvArr[0]} initTasks={kvArr[1]} project={kvArr[0]}></TaskList>)}
     </main>
   )
 }

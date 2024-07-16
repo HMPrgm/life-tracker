@@ -27,6 +27,12 @@ const seedDB = async () => {
             date:1721070210861,
             completed:false,
             project:"School"
+        },
+        {
+            name:"Cook Dinner",
+            date:1721070210861,
+            completed:false,
+            project:"Personal"
         }
     ]);
 }
