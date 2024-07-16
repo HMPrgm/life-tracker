@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import AddTaskForm from './addTaskForm'
+import AddTaskForm, { EventFormState } from './addTaskForm'
 
 export default function AddTask({ addTask, project }: { addTask: Function, project:string }) {
 
@@ -9,12 +9,8 @@ export default function AddTask({ addTask, project }: { addTask: Function, proje
   const startAddingTask = () => {
     setIsAddingTask(true)
   }
-  const addTaskEvent = (name: string, date: number, project:string) => {
-    addTask({
-      name,
-      date,
-      project
-    });
+  const addTaskEvent = (formTask:EventFormState) => {
+    addTask(formTask);
     setIsAddingTask(false)
   }
   const cancelAddTask = () => {

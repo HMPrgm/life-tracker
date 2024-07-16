@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import TaskList from './components/taskList'
 import { Task, tasksToMap } from './interfaces/task'
+import AddTaskForm from './components/addTask/addTaskForm'
+import NoTasks from './components/noTasks'
 const api = require('../_utils/api')
 export default function Page() {
 
@@ -39,6 +41,11 @@ export default function Page() {
 
   if (isLoading || taskMap === undefined) {
     return (<main className='p-6'>Loading</main>)
+  }
+  if (tasks.length === 0) {
+    return (
+      <NoTasks addTask={addTask}></NoTasks>
+    )
   }
   return (
     <main className='p-6 flex gap-10'>
