@@ -6,26 +6,43 @@ const api = require('../_utils/api')
 export default function Page() {
 
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [tasks, setTasks] = useState<Map<string,Task[]>>()
+  const [tasks, setTasks] = useState<Task[]>([])
+  const [taskMap, setTaskMap] = useState<Map<string, Task[]>>()
 
 
-  const getTasks = async () => {
-    setTasks(tasksToMap(await api.getTasks()));
+  const load = async () => {
+    const apiTasks = await api.getTasks()
+    setTasks(apiTasks);
     setIsLoading(false);
   }
 
+  const refresh = () => {
+    setTaskMap(tasksToMap(tasks))
+  }
 
+  const addTask = async (task: Task) => {
+    const newTask = await api.addTask(task);
+    setTasks(tasks.concat(newTask))
+  }
 
-  useEffect(()=>{
-    getTasks();
-  },[])
+  const removeTask = async (id: string) => {
+    await api.removeTask(id);
+    setTasks(tasks.filter(t => t._id !== id))
+  }
 
-  if (isLoading || tasks === undefined) {
-    return(<main className='p-6'>Loading</main>)
+  useEffect(() => {
+    refresh();
+  }, [tasks])
+  useEffect(() => {
+    load();
+  }, [])
+
+  if (isLoading || taskMap === undefined) {
+    return (<main className='p-6'>Loading</main>)
   }
   return (
     <main className='p-6 flex gap-10'>
-      {Array.from( (tasks).entries()).map(kvArr=><TaskList key={kvArr[0]} initTasks={kvArr[1]} project={kvArr[0]} refresh={getTasks}></TaskList>)}
+      {Array.from((taskMap).keys()).toSorted().map(key => <TaskList key={key} initTasks={taskMap.get(key) as Task[]} project={key} addTask={addTask} removeTask={removeTask}></TaskList>)}
     </main>
   )
 }

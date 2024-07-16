@@ -6,7 +6,7 @@ interface EventFormState{
     date:number;
     project:string;
   }
-export default function AddTaskForm({addTask, cancel}:{addTask:Function, cancel:Function}) {
+export default function AddTaskForm({addTask, cancel, project}:{addTask:Function, cancel:Function, project:string}) {
 
     const [formData, setFormData] = useState<EventFormState>({ name: '', date: 0, project: '' });
 
@@ -35,7 +35,7 @@ export default function AddTaskForm({addTask, cancel}:{addTask:Function, cancel:
         <input type="date"  placeholder='date' id="date" className='text-xs' onChange={handleChange}/>
         <div className="flex text-xs justify-evenly">
             <h4 className='font-bold text-sm'>Project</h4>
-            <select id="project" name="project" onChange={handleChangeSelect}>
+            <select id="project" name="project" onChange={handleChangeSelect} defaultValue={project}>
                 <option value="School">School</option>
                 <option value="Personal">Personal</option>
                 <option value="Work">Work</option>

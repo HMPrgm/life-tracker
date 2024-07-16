@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import AddTaskForm from './addTaskForm'
 
-export default function AddTask({ addTask }: { addTask: Function }) {
+export default function AddTask({ addTask, project }: { addTask: Function, project:string }) {
 
   const [isAddingTask, setIsAddingTask] = useState(false)
 
@@ -27,7 +27,7 @@ export default function AddTask({ addTask }: { addTask: Function }) {
     )
   } else {
     return (
-    <AddTaskForm addTask={addTaskEvent} cancel={cancelAddTask}></AddTaskForm>
+    <AddTaskForm addTask={addTaskEvent} cancel={cancelAddTask} project={project}></AddTaskForm>
     )
   }
 }
