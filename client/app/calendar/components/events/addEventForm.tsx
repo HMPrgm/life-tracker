@@ -27,7 +27,7 @@ export default function AddEventForm({ addEvent,removeEvent,initialEvent }: { ad
     if (formData.name && formData.date)
       addEvent({
         name: formData.name,
-        date: d.valueOf(),
+        date: d.valueOf() + 3600*1000*5,
         project: 'School'
       });
     setFormData({name:'',date:''})

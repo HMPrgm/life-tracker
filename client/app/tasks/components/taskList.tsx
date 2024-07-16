@@ -9,16 +9,18 @@ export default function TaskList({ initTasks, project, refresh }: { initTasks: T
 
     const addTask = async (task: Task) => {
         const newTask = await api.addTask(task);
-        if (task.project !== project) {
-            refresh();
-            return;
-        }
-        setTasks(tasks.concat(newTask))
+        refresh();
+        // if (task.project !== project) {
+        //     refresh();
+        //     return;
+        // }
+        // setTasks(tasks.concat(newTask))
     }
 
     const removeTask = async (id: string) => {
         await api.removeTask(id);
-        setTasks(tasks.filter(t => t._id !== id))
+        refresh();
+        // setTasks(tasks.filter(t => t._id !== id))
     }
 
     useEffect(() => {

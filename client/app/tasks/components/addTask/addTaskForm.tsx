@@ -23,7 +23,6 @@ export default function AddTaskForm({addTask, cancel}:{addTask:Function, cancel:
         const date:Date = new Date(formData.date)
         if (formData.name && formData.date)
             addTask(formData.name,date.valueOf()+1000*60*60*6, formData.project);
-        alert(formData.date)
     }
 
     const handleCancel = () => {
