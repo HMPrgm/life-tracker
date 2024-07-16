@@ -4,6 +4,7 @@ import { Task } from '../../../tasks/interfaces/task'
 export default function EventItem({ event, setCurrentEvent }: { event: Task, setCurrentEvent: Function }) {
 
   const handleClick = () => {
+    console.log(event.name)
     setCurrentEvent(event);
   }
 

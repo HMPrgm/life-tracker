@@ -9,7 +9,7 @@ AddEventForm.defaultProps = {
 
 interface EventFormState{
   name:string;
-  date:number;
+  date:string;
 }
 
 export default function AddEventForm({ addEvent,removeEvent,initialEvent }: { addEvent: Function,removeEvent:Function,initialEvent:Task|null }) { //{ currentEvent }: { currentEvent: Task | null }
@@ -22,11 +22,12 @@ export default function AddEventForm({ addEvent,removeEvent,initialEvent }: { ad
   }
 
   const handleSubmit = () => {
-    console.log(formData.date)
+    const d:Date = new Date(formData.date)
+
     if (formData.name && formData.date)
       addEvent({
         name: formData.name,
-        date: formData.date,
+        date: d.valueOf(),
         project: 'School'
       });
     setFormData({name:'',date:''})
