@@ -18,18 +18,20 @@ export default function AddTaskForm({ addTask, cancel, project }: { addTask: Fun
         const { id, value } = e.target;
         setFormData({ ...formData, [id]: value });
     }
+    const handleChangeNumeric = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, valueAsNumber } = e.target;
+        setFormData({ ...formData, [id]: valueAsNumber });
+    }
     const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { id, value } = e.target;
         setFormData({ ...formData, [id]: value });
     }
 
     const handleSubmit = () => {
-        const date: Date = new Date(formData.date)
-        console.log(formData.time.valueOf() + date.valueOf())
         if (formData.name && formData.date)
             addTask({
                 name: formData.name,
-                date: date.valueOf() + 1000 * 60 * 60 * 6,
+                date: formData.date + formData.time,
                 project: !formData.project?project:formData.project
             });
     }
@@ -41,8 +43,8 @@ export default function AddTaskForm({ addTask, cancel, project }: { addTask: Fun
     return (
         <form onSubmit={handleSubmit} className="border-2 border-slate-600 rounded p-2 my-2 flex flex-col gap-1">
             <input type="text" placeholder='Name' id="name" onChange={handleChange} />
-            <input type="date" placeholder='date' id="date" className='text-xs' onChange={handleChange} />
-            <input type="time" placeholder='time' id="time" className='text-xs' onChange={handleChange} />
+            <input type="date" placeholder='date' id="date" className='text-xs' onChange={handleChangeNumeric} />
+            <input type="time" placeholder='time' id="time" className='text-xs' onChange={handleChangeNumeric} />
             <div className="flex text-xs justify-evenly">
                 <h4 className='font-bold text-sm'>Project</h4>
                 <select id="project" name="project" onChange={handleChangeSelect} defaultValue={project}>
