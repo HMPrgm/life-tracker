@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Task = require('./models/task')
+const User = require('./models/user')
 main().catch(err => console.log(err));
 
 async function main() {
@@ -35,8 +36,11 @@ const seedDB = async () => {
             project:"Personal"
         }
     ]);
+    await User.deleteMany({})
 }
 
 seedDB().then(() => {
     mongoose.connection.close();
+    console.log("Done!")
+    
 })
