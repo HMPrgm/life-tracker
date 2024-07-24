@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router();
 const User = require('../models/user')
+const passport = require('passport');
+
 
 router.post('/register', async (req,res)=> {
     const {email, username, password} = req.body
@@ -10,5 +12,8 @@ router.post('/register', async (req,res)=> {
     res.send(newUser)
 })
 
+router.post('/login', passport.authenticate('local', {failureMessage:'Login Failed'}),async (req,res)=> {
+    res.send({status:200,message:'success!'})
+})
 module.exports = router;
 

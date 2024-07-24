@@ -8,9 +8,20 @@ export interface RegisterData {
 }
 export async function register(input:RegisterData): Promise<any> {
     try {
-        alert("Here")
         const response = await axios.post("http://localhost:5000/auth/register", input)
-        alert(response)
+        return response;
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export interface LoginData {
+    email: string;
+    password: string;
+}
+export async function login(input:LoginData): Promise<any> {
+    try {
+        const response = await axios.post("http://localhost:5000/auth/login", input)
         return response;
     } catch (e) {
         console.log(e)
