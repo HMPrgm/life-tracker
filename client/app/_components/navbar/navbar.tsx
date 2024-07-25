@@ -1,23 +1,44 @@
 import React from 'react'
 import NavbarLink from './navbarLink'
+import Image from 'next/image'
+import MiniCalendar from './miniCalendar'
+import CalendarAccounts, { Calendar } from './calendarAccounts'
+
+interface CalendarAccount {
+  email:string;
+  calendars:Calendar[];
+}
 
 export default function Navbar() {
+
+  const calendars: CalendarAccount[] = [
+    {
+      email: 'henrymprof@gmail.com',
+      calendars: [
+        {
+          name: 'Main',
+          color: '#156bff'
+        },
+        {
+          name: 'University',
+          color: '#156bff'
+        }
+      ]
+    }
+  ]
+
   return (
-    <nav className='p-6 grid grid-cols-1 h-screen bg-slate-300'>
-        <div className='flex flex-col'>
-        <h3 className='text-lg font-bold'><NavbarLink href='/'>Hi User!</NavbarLink></h3>
-          <NavbarLink href='/tasks'>Tasks</NavbarLink>
-          <NavbarLink href='/habits'>Habits</NavbarLink>
-          <NavbarLink href='/calendar'>Calendar</NavbarLink>
-
-
-        </div>
-        <div className='flex flex-col'>
-          <h3 className='text-lg font-bold'>Projects</h3>
-          <NavbarLink href='/projects/school'>School</NavbarLink>
-          <NavbarLink href='/projects/work'>Work</NavbarLink>
-          <NavbarLink href='/projects/vacation'>Vacation</NavbarLink>
-        </div>
-    </nav>
+    <nav className=' bg-Pwhite border-r-[1px] border-Pblack [&>*]:p-2 min-h-screen'>
+      <div className='flex items-center gap-4 border-b-[1px] border-Pblack '>
+        <Image src="settings.svg" alt="settings" width={20} height={20} />
+        <div className='flex gap-1'><Image src='drop_down.svg' alt='Drop Down Button' width={15} height={15} />Calendar</div>
+      </div>
+      <div className='border-b-[1px] border-Pblack'>
+        <MiniCalendar></MiniCalendar>
+      </div>
+      <div>
+        {calendars.map((c)=> <CalendarAccounts key={c.email} email={c.email} calendars={c.calendars}/>)}
+      </div>
+    </nav >
   )
 }

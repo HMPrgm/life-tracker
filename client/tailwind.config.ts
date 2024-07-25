@@ -9,7 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        main: "#123123",
+        Pwhite: "#F8F9FA",
+        Swhite: "#E9ECEF",
+        Pblack: "#212529",
+        Sblack: "#343A40",
+        accent: "#EB5E28"
       },
     },
   },
