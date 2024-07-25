@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import TextInput from '../components/textInput';
-import { login, LoginData } from '../auth';
+import { login, LoginData, getUserData} from '../auth';
 
 
 export default function Page() {
@@ -10,11 +10,12 @@ export default function Page() {
         password: '',
     });
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        getUserData();
         const { id, value } = e.target;
         setFormData({ ...formData, [id]: value });
     }
     const handleSubmit = () => {
-        login(formData)
+        console.log(login(formData))
     }
 
     return (

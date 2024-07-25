@@ -24,8 +24,7 @@ async function main() {
 app.use(cors());
 app.use(express.json());
 
-app.use('/tasks', tasksRoute)
-app.use('/auth', authRoute)
+
 
 const sessionExpiration = 1000*60*60*24*7; //1 Week
 const sessionConfig = {
@@ -48,7 +47,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
-
+app.use('/tasks', tasksRoute)
+app.use('/auth', authRoute)
 
 
 

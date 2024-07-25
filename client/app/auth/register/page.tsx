@@ -14,8 +14,8 @@ export default function Page() {
         const { id, value } = e.target;
         setFormData({ ...formData, [id]: value });
     }
-    const handleSubmit = () => {
-        register(formData)
+    const handleSubmit = async () => {
+        console.log(await register(formData))
     }
 
     return (
