@@ -28,10 +28,15 @@ router.post('/register', async (req,res)=> {
 })
 
 router.post('/login', passport.authenticate('local'),async (req,res)=> {
-    res.send(req.user.username)
+    res.send('s')
 })
-router.get('/logout', (req, res) => {
-    req.logout();
+router.get('/logout', (req, res, next) => {
+    req.logout(function (err) {
+        if (err) {
+            return next(err);
+        }
+        res.send('successfully Logged out')
+    });
 })
 router.get('/checkAuth',async (req,res) => {
     res.send()

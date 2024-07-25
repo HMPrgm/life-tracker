@@ -27,6 +27,14 @@ export async function login(input:LoginData): Promise<any> {
         console.log(e)
     }
 }
+export async function logout(): Promise<any> {
+    try {
+        const response = await axios.get("http://localhost:5000/auth/logout")
+        return response;
+    } catch (e) {
+        console.log(e)
+    }
+}
 
 export async function getUserData(): Promise<any> {
     try {

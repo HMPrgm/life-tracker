@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import TextInput from '../components/textInput';
-import { login, LoginData, getUserData} from '../auth';
+import { login, LoginData, getUserData, logout} from '../auth';
 
 
 export default function Page() {
@@ -20,6 +20,7 @@ export default function Page() {
 
     return (
         <div className=''>
+            <button onClick={logout}>LogOut</button>
             <h2 className='text-center text-5xl font-bold my-24'>Login</h2>
             <form className="flex flex-col my-10 mx-[10vw] lg:mx-[30vw] gap-2">
                 <TextInput type='email' name='Email' id='email' placeholder='email@gmail.com' handleChange={handleChange}></TextInput>
