@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import TextInput from '../components/textInput';
-import { register, RegisterData } from '../auth';
+import { register, RegisterData, getUserData } from '../auth';
 
 
 export default function Page() {
@@ -11,6 +11,7 @@ export default function Page() {
         password: '',
     });
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(getUserData())
         const { id, value } = e.target;
         setFormData({ ...formData, [id]: value });
     }

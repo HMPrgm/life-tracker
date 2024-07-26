@@ -13,6 +13,12 @@ const isLoggedIn = (req,res,next) => {
     next();
 }
 
+const isRunning = (req,res,next) => {
+    console.log(req.user)
+    console.log("working!")
+    next();
+}
+
 router.post('/register', async (req,res)=> {
     try {
         const { email, username, password } = req.body;
@@ -26,20 +32,61 @@ router.post('/register', async (req,res)=> {
         res.status(400).json(e.message)
     }
 })
+// register.post("/register", (req, res) => {
+//   passport.authenticate("local-register", function (error, user, info) {
+//     if (error) {
+//       return res.status(500).json({
+//         message: error || "Something happend",
+//         error: error.message || "Server error",
+//       });
+//     }
+//     req.logIn(user, function (error, data) {
+//       if (error) {
+//         return res.status(500).json({
+//           message: error || "Something happend",
+//           error: error.message || "Server error",
+//         });
+//       }
+//       return res.json(user);
+//     });
+//   })(req, res);
+// });
 
-router.post('/login', passport.authenticate('local'),async (req,res)=> {
-    res.send('s')
-})
+router.post("/login", function (req, res) {
+    passport.authenticate("local-login", function (error, user, info) {
+      if (error) {
+        return res.status(500).json({
+          message: error || "Something happend",
+          error: error.message || "Server error",
+        });
+      }
+  
+      req.logIn(user, function (error, data) {
+        if (error) {
+          return res.status(500).json({
+            message: error || "Something happend",
+            error: error.message || "Server error",
+          });
+        }
+      });
+  
+      user.isAuthenticated = true;
+      return res.json(user);
+    })(req, res);
+  });
 router.get('/logout', (req, res, next) => {
+    console.log(req.session.passport)
     req.logout(function (err) {
         if (err) {
             return next(err);
         }
+        console.log(req.session.user)
         res.send('successfully Logged out')
     });
 })
 router.get('/checkAuth',async (req,res) => {
-    res.send()
+  console.log("HELELELEP")
+    res.send(req.session)
 })
 
 
