@@ -26,7 +26,7 @@ app.use(express.json());
 
 
 
-const sessionExpiration = 1000*60*60*24*7; //1 Week
+const sessionExpiration = 3 //1000*60*60*24*7; //1 Week
 const sessionConfig = {
   secret: 'REPLACELATER', 
   resave:false,

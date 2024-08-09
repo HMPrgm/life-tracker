@@ -16,7 +16,7 @@ export async function register(input:RegisterData): Promise<any> {
 }
 
 export interface LoginData {
-    email: string;
+    username: string;
     password: string;
 }
 export async function login(input:LoginData): Promise<any> {
@@ -37,11 +37,11 @@ export async function logout(): Promise<any> {
     }
 }
 
-export async function getUserData(): Promise<any> {
-    try {
-        const response = await axios.get("http://localhost:5000/auth/checkAuth")
-        console.log(response.data)
-    } catch (e) {
-        console.log(e)
-    }
-}
+// export async function getUserData(): Promise<any> {
+//     try {
+//         const response = await axios.get("http://localhost:5000/auth/checkAuth")
+//         console.log(response.data)
+//     } catch (e) {
+//         console.log(e)
+//     }
+// }

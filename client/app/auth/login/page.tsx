@@ -6,7 +6,7 @@ import { login, LoginData, logout} from '../auth';
 
 export default function Page() {
     const [formData, setFormData] = useState<LoginData>({
-        email: '',
+        username: '',
         password: '',
     });
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +22,7 @@ export default function Page() {
             <button onClick={logout}>LogOut</button>
             <h2 className='text-center text-5xl font-bold my-24'>Login</h2>
             <form className="flex flex-col my-10 mx-[10vw] lg:mx-[30vw] gap-2">
-                <TextInput type='email' name='Email' id='email' placeholder='email@gmail.com' handleChange={handleChange}></TextInput>
+                <TextInput type='email' name='Email' id='username' placeholder='email@gmail.com' handleChange={handleChange}></TextInput>
                 <TextInput type='password' name='Password' id='password' placeholder='************' handleChange={handleChange}></TextInput>
 
                 <button className='border-2 border-black rounded text-black text-lg px-2 py-1 my-4 hover:text-white hover:bg-black mx-auto transition-colors duration-500 ease-out'
